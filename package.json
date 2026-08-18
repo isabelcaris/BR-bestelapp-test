@@ -1,0 +1,13 @@
+{
+  "name": "job-fair-drinks",
+  "version": "1.0.0",
+  "description": "Order drinks from your job fair stand via QR code, no need to leave the stand",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "qrcode": "^1.5.3"
+  }
+}

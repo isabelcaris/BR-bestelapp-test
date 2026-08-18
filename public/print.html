@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Print QR codes - Job Fair Drinks</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+@media print {
+  header.top, .no-print { display: none !important; }
+  body { background: #fff; }
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.qr-card {
+  border: 2px dashed #bbb;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  break-inside: avoid;
+}
+.qr-card img { width: 100%; max-width: 220px; height: auto; }
+.qr-card .stand-name { font-weight: 700; margin-top: 8px; font-size: 16px; }
+.qr-card .hint { color: #666; font-size: 12px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>🍹 Print QR codes</h1>
+  <nav>
+    <a href="admin.html">Admin</a>
+    <a href="bar.html">Bar dashboard</a>
+    <a href="print.html" class="active">Print QR codes</a>
+  </nav>
+</header>
+
+<div class="page">
+  <div class="row no-print" style="margin-bottom: 16px;">
+    <button onclick="window.print()">Print this page</button>
+  </div>
+  <div class="cards" id="cards">
+    <p class="muted">Loading...</p>
+  </div>
+</div>
+
+<script src="print.js"></script>
+</body>
+</html>
