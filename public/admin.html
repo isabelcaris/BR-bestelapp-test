@@ -1,35 +1,35 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Admin - Job Fair Drinks</title>
+<title>Beheer - Ekonomika Jobbeurs</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <header class="top">
-  <h1>🍹 Job Fair Drinks - Admin</h1>
+  <h1>Ekonomika Jobbeurs - Beheer</h1>
   <nav>
-    <a href="admin.html" class="active">Admin</a>
-    <a href="bar.html">Bar dashboard</a>
-    <a href="print.html">Print QR codes</a>
+    <a href="admin.html" class="active">Beheer</a>
+    <a href="bar.html">Bardashboard</a>
+    <a href="print.html">QR-codes printen</a>
   </nav>
 </header>
 
 <div class="page">
 
   <div class="card" id="network-card">
-    <h2>Network</h2>
-    <p class="muted small">Partners scan QR codes to place orders, so this page must be open using an address their phones can reach over the venue wifi - not <code>localhost</code>.</p>
-    <div id="network-info" class="muted small">Checking...</div>
+    <h2>Netwerk</h2>
+    <p class="muted small">Partners scannen QR-codes om te bestellen, dus deze pagina moet open staan op een adres dat hun telefoon kan bereiken via de wifi van de locatie - niet <code>localhost</code>.</p>
+    <div id="network-info" class="muted small">Bezig met controleren...</div>
   </div>
 
   <div class="card">
-    <h2>Drink menu</h2>
+    <h2>Drankenkaart</h2>
     <div class="row" style="margin-bottom:12px;">
-      <input type="text" id="drink-name" placeholder="Drink name (e.g. Espresso)" style="flex:2;" />
-      <input type="number" id="drink-price" placeholder="Price (optional)" step="0.01" min="0" style="flex:1;" />
-      <button id="add-drink-btn">Add drink</button>
+      <input type="text" id="drink-name" placeholder="Naam drankje (bv. Espresso)" style="flex:2;" />
+      <input type="number" id="drink-price" placeholder="Prijs (optioneel)" step="0.01" min="0" style="flex:1;" />
+      <button id="add-drink-btn">Drankje toevoegen</button>
     </div>
     <div id="drinks-list"></div>
   </div>
@@ -37,8 +37,8 @@
   <div class="card">
     <h2>Stands</h2>
     <div class="row" style="margin-bottom:12px;">
-      <input type="text" id="stand-name" placeholder="Stand name (e.g. Acme Corp - Stand 12)" style="flex:2;" />
-      <button id="add-stand-btn">Add stand</button>
+      <input type="text" id="stand-name" placeholder="Naam stand (bv. Acme Corp - Stand 12)" style="flex:2;" />
+      <button id="add-stand-btn">Stand toevoegen</button>
     </div>
     <div id="stands-list"></div>
   </div>

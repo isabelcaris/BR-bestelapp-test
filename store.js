@@ -26,10 +26,10 @@ function load() {
     stands: [],
     drinks: [
       { id: makeId(), name: 'Water', price: 0, available: true },
-      { id: makeId(), name: 'Coffee', price: 0, available: true },
-      { id: makeId(), name: 'Coca-Cola', price: 0, available: true },
-      { id: makeId(), name: 'Orange juice', price: 0, available: true },
-      { id: makeId(), name: 'Beer', price: 0, available: true },
+      { id: makeId(), name: 'Koffie', price: 0, available: true },
+      { id: makeId(), name: 'Cola', price: 0, available: true },
+      { id: makeId(), name: 'Sinaasappelsap', price: 0, available: true },
+      { id: makeId(), name: 'Bier', price: 0, available: true },
     ],
     orders: [],
   };

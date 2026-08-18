@@ -31,12 +31,12 @@ const app = document.getElementById('app');
 const quantities = {};
 
 function statusLabel(status) {
-  return { pending: 'Order received', preparing: 'Being prepared', delivered: 'Delivered', cancelled: 'Cancelled' }[status] || status;
+  return { pending: 'Bestelling ontvangen', preparing: 'Wordt klaargemaakt', delivered: 'Geleverd', cancelled: 'Geannuleerd' }[status] || status;
 }
 
 async function main() {
   if (!standId) {
-    app.innerHTML = '<div class="card"><p>No stand specified. Please scan the QR code at your stand.</p></div>';
+    app.innerHTML = '<div class="card"><p>Geen stand opgegeven. Scan de QR-code aan je stand.</p></div>';
     return;
   }
 
@@ -47,11 +47,12 @@ async function main() {
       api('/api/drinks'),
     ]);
   } catch (e) {
-    app.innerHTML = `<div class="card"><p>Could not load this stand's order page: ${escapeHtml(e.message)}</p></div>`;
+    app.innerHTML = `<div class="card"><p>Kon de bestelpagina van deze stand niet laden: ${escapeHtml(e.message)}</p></div>`;
     return;
   }
 
-  document.getElementById('stand-title').textContent = `🍹 ${stand.name}`;
+  document.getElementById('stand-title').textContent = stand.name;
+  document.title = `Ekonomika Jobbeurs - ${stand.name}`;
   drinks = drinks.filter((d) => d.available);
   drinks.forEach((d) => { quantities[d.id] = 0; });
 
@@ -60,20 +61,20 @@ async function main() {
 
 function render(stand, drinks) {
   if (drinks.length === 0) {
-    app.innerHTML = '<div class="card"><p>No drinks are available to order right now.</p></div>';
+    app.innerHTML = '<div class="card"><p>Er zijn momenteel geen drankjes beschikbaar.</p></div>';
     return;
   }
 
   app.innerHTML = `
     <div class="card">
-      <h2>Ordering for: ${escapeHtml(stand.name)}</h2>
-      <p class="muted small">Pick your drinks and send the order to the bar - someone will bring it to your stand.</p>
+      <h2>Bestellen voor: ${escapeHtml(stand.name)}</h2>
+      <p class="muted small">Kies je drankjes en stuur de bestelling naar de bar - iemand brengt ze naar je stand.</p>
       <div id="drinks-form"></div>
       <div style="margin-top:14px;">
-        <input type="text" id="note" placeholder="Note for the bar (optional, e.g. 'no ice')" />
+        <input type="text" id="note" placeholder="Opmerking voor de bar (optioneel, bv. 'geen ijs')" />
       </div>
       <div style="margin-top:16px;">
-        <button id="submit-btn" style="width:100%;">Send order</button>
+        <button id="submit-btn" style="width:100%;">Bestelling versturen</button>
       </div>
     </div>
   `;
@@ -119,14 +120,14 @@ async function submitOrder(stand, drinks) {
     .map(([drinkId, qty]) => ({ drinkId, qty }));
 
   if (items.length === 0) {
-    toast('Select at least one drink');
+    toast('Kies minstens één drankje');
     return;
   }
 
   const note = document.getElementById('note').value;
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Sending...';
+  btn.textContent = 'Bezig met versturen...';
 
   try {
     const order = await api('/api/orders', {
@@ -137,20 +138,20 @@ async function submitOrder(stand, drinks) {
   } catch (e) {
     toast(e.message);
     btn.disabled = false;
-    btn.textContent = 'Send order';
+    btn.textContent = 'Bestelling versturen';
   }
 }
 
 function showConfirmation(stand, drinks, order) {
   app.innerHTML = `
     <div class="card">
-      <h2>Order sent!</h2>
-      <p>The bar has been notified. Here's what you ordered:</p>
+      <h2>Bestelling verstuurd!</h2>
+      <p>De bar is verwittigd. Dit heb je besteld:</p>
       <ul>
         ${order.items.map((it) => `<li>${it.qty} x ${escapeHtml(it.name)}</li>`).join('')}
       </ul>
-      <p><span class="badge pending" id="status-badge">Order received</span></p>
-      <button id="new-order-btn" class="secondary" style="margin-top:10px;">Place another order</button>
+      <p><span class="badge pending" id="status-badge">Bestelling ontvangen</span></p>
+      <button id="new-order-btn" class="secondary" style="margin-top:10px;">Nog een bestelling plaatsen</button>
     </div>
   `;
   document.getElementById('new-order-btn').addEventListener('click', () => render(stand, drinks));

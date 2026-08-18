@@ -19,10 +19,10 @@ function escapeHtml(str) {
 
 function timeAgo(ts) {
   const secs = Math.max(0, Math.floor((Date.now() - ts) / 1000));
-  if (secs < 60) return `${secs}s ago`;
+  if (secs < 60) return `${secs}s geleden`;
   const mins = Math.floor(secs / 60);
-  if (mins < 60) return `${mins}m ago`;
-  return `${Math.floor(mins / 60)}h ago`;
+  if (mins < 60) return `${mins}m geleden`;
+  return `${Math.floor(mins / 60)}u geleden`;
 }
 
 let audioCtx = null;
@@ -112,19 +112,19 @@ async function refresh() {
   document.getElementById('count-delivered').textContent = delivered.length;
 
   renderColumn('pending', 'col-pending', pending, (o) => `
-    <button onclick="setStatus('${o.id}', 'preparing')">Start preparing</button>
-    <button class="secondary" onclick="setStatus('${o.id}', 'delivered')">Mark delivered</button>
-    <button class="danger" onclick="setStatus('${o.id}', 'cancelled')">Cancel</button>
-  `, 'No pending orders');
+    <button onclick="setStatus('${o.id}', 'preparing')">Start bereiding</button>
+    <button class="secondary" onclick="setStatus('${o.id}', 'delivered')">Markeer als geleverd</button>
+    <button class="danger" onclick="setStatus('${o.id}', 'cancelled')">Annuleren</button>
+  `, 'Geen nieuwe bestellingen');
 
   renderColumn('preparing', 'col-preparing', preparing, (o) => `
-    <button onclick="setStatus('${o.id}', 'delivered')">Mark delivered</button>
-    <button class="danger" onclick="setStatus('${o.id}', 'cancelled')">Cancel</button>
-  `, 'Nothing being prepared');
+    <button onclick="setStatus('${o.id}', 'delivered')">Markeer als geleverd</button>
+    <button class="danger" onclick="setStatus('${o.id}', 'cancelled')">Annuleren</button>
+  `, 'Niets in voorbereiding');
 
-  renderColumn('delivered', 'col-delivered', delivered, () => '', 'Nothing delivered yet');
+  renderColumn('delivered', 'col-delivered', delivered, () => '', 'Nog niets geleverd');
 
-  document.getElementById('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  document.getElementById('last-updated').textContent = 'Bijgewerkt om ' + new Date().toLocaleTimeString('nl-BE');
 }
 
 refresh();

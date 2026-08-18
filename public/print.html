@@ -1,14 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Print QR codes - Job Fair Drinks</title>
+<title>QR-codes printen - Ekonomika Jobbeurs</title>
 <link rel="stylesheet" href="style.css" />
 <style>
 @media print {
   header.top, .no-print { display: none !important; }
   body { background: #fff; }
+  .qr-card { box-shadow: none !important; }
 }
 .cards {
   display: grid;
@@ -16,33 +17,42 @@
   gap: 16px;
 }
 .qr-card {
-  border: 2px dashed #bbb;
+  background: #fff;
+  border: 2px dashed #c7d2df;
   border-radius: 10px;
   padding: 16px;
   text-align: center;
   break-inside: avoid;
+  box-shadow: 0 10px 30px rgba(3, 20, 40, 0.16);
 }
 .qr-card img { width: 100%; max-width: 220px; height: auto; }
-.qr-card .stand-name { font-weight: 700; margin-top: 8px; font-size: 16px; }
-.qr-card .hint { color: #666; font-size: 12px; margin-top: 4px; }
+.qr-card .stand-name { font-weight: 700; margin-top: 8px; font-size: 16px; color: var(--brand-dark); }
+.qr-card .hint { color: var(--muted); font-size: 12px; margin-top: 4px; }
+.no-print button {
+  background: #fff;
+  color: var(--brand-dark);
+  box-shadow: 0 10px 30px rgba(3, 20, 40, 0.2);
+}
+.no-print button:hover { background: #eef4fb; }
+#cards > p.muted { color: rgba(255, 255, 255, 0.85); }
 </style>
 </head>
 <body>
 <header class="top">
-  <h1>🍹 Print QR codes</h1>
+  <h1>Ekonomika Jobbeurs - QR-codes printen</h1>
   <nav>
-    <a href="admin.html">Admin</a>
-    <a href="bar.html">Bar dashboard</a>
-    <a href="print.html" class="active">Print QR codes</a>
+    <a href="admin.html">Beheer</a>
+    <a href="bar.html">Bardashboard</a>
+    <a href="print.html" class="active">QR-codes printen</a>
   </nav>
 </header>
 
 <div class="page">
   <div class="row no-print" style="margin-bottom: 16px;">
-    <button onclick="window.print()">Print this page</button>
+    <button onclick="window.print()">Deze pagina afdrukken</button>
   </div>
   <div class="cards" id="cards">
-    <p class="muted">Loading...</p>
+    <p class="muted">Bezig met laden...</p>
   </div>
 </div>
 

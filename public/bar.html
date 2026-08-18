@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bar dashboard - Job Fair Drinks</title>
+<title>Bardashboard - Ekonomika Jobbeurs</title>
 <link rel="stylesheet" href="style.css" />
 <style>
 .board {
@@ -16,65 +16,72 @@
 }
 .column {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 14px;
   min-height: 200px;
+  box-shadow: 0 10px 30px rgba(3, 20, 40, 0.16);
+  border-top: 4px solid var(--brand);
 }
+.column.col-pending { border-top-color: #d97706; }
+.column.col-preparing { border-top-color: #1e40af; }
+.column.col-delivered { border-top-color: #16a34a; }
 .column h2 {
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   display: flex;
   justify-content: space-between;
 }
 .order-card {
-  background: var(--bg);
+  background: var(--brand-light);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 12px;
   margin-bottom: 10px;
 }
-.order-card .stand-name { font-weight: 700; font-size: 15px; }
+.order-card .stand-name { font-weight: 700; font-size: 15px; color: var(--brand-dark); }
 .order-card .time { color: var(--muted); font-size: 12px; }
 .order-card ul { margin: 6px 0; padding-left: 18px; }
 .order-card .note { font-style: italic; font-size: 13px; color: var(--warn); }
 .order-card .actions { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
 .order-card .actions button { padding: 6px 10px; font-size: 13px; }
+.toolbar { color: rgba(255, 255, 255, 0.9); }
+.toolbar .muted { color: rgba(255, 255, 255, 0.75); }
 </style>
 </head>
 <body>
 <header class="top">
-  <h1>🍹 Bar dashboard</h1>
+  <h1>Ekonomika Jobbeurs - Bardashboard</h1>
   <nav>
-    <a href="admin.html">Admin</a>
-    <a href="bar.html" class="active">Bar dashboard</a>
-    <a href="print.html">Print QR codes</a>
+    <a href="admin.html">Beheer</a>
+    <a href="bar.html" class="active">Bardashboard</a>
+    <a href="print.html">QR-codes printen</a>
   </nav>
 </header>
 
 <div class="page">
-  <div class="row" style="justify-content: space-between; align-items:center; margin-bottom: 10px;">
+  <div class="row toolbar" style="justify-content: space-between; align-items:center; margin-bottom: 10px;">
     <label class="row" style="align-items:center; gap:6px;">
       <input type="checkbox" id="sound-toggle" checked style="width:auto;" />
-      <span class="small muted">Play sound on new order</span>
+      <span class="small">Geluid afspelen bij nieuwe bestelling</span>
     </label>
     <span class="small muted" id="last-updated"></span>
   </div>
 
   <div class="board">
-    <div class="column">
-      <h2><span>Pending</span><span id="count-pending">0</span></h2>
+    <div class="column col-pending">
+      <h2><span>Nieuw</span><span id="count-pending">0</span></h2>
       <div id="col-pending"></div>
     </div>
-    <div class="column">
-      <h2><span>Preparing</span><span id="count-preparing">0</span></h2>
+    <div class="column col-preparing">
+      <h2><span>In voorbereiding</span><span id="count-preparing">0</span></h2>
       <div id="col-preparing"></div>
     </div>
-    <div class="column">
-      <h2><span>Delivered (last hour)</span><span id="count-delivered">0</span></h2>
+    <div class="column col-delivered">
+      <h2><span>Geleverd (laatste uur)</span><span id="count-delivered">0</span></h2>
       <div id="col-delivered"></div>
     </div>
   </div>

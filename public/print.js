@@ -10,15 +10,15 @@ async function main() {
   const stands = await res.json();
 
   if (stands.length === 0) {
-    cardsEl.innerHTML = '<p class="muted">No stands added yet. Add stands on the Admin page first.</p>';
+    cardsEl.innerHTML = '<p class="muted">Nog geen stands toegevoegd. Voeg eerst stands toe op de beheerpagina.</p>';
     return;
   }
 
   cardsEl.innerHTML = stands.map((s) => `
     <div class="qr-card">
-      <img src="/api/stands/${s.id}/qrcode.png" alt="QR code for ${escapeHtml(s.name)}" />
+      <img src="/api/stands/${s.id}/qrcode.png" alt="QR-code voor ${escapeHtml(s.name)}" />
       <div class="stand-name">${escapeHtml(s.name)}</div>
-      <div class="hint">Scan to order drinks</div>
+      <div class="hint">Scan om drankjes te bestellen</div>
     </div>
   `).join('');
 }
